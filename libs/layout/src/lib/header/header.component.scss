@@ -1,0 +1,13 @@
+::ng-deep .mat-toolbar-row-header {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+}
+
+.header-spacer {
+  flex: 1 1 auto;
+}
+
+::ng-deep .mat-expansion-panel-header {
+  padding: 0 16px !important;
+}

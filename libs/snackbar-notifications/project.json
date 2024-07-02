@@ -1,0 +1,44 @@
+{
+  "name": "snackbar-notifications",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/snackbar-notifications/src",
+  "prefix": "lib",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/snackbar-notifications/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/snackbar-notifications/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/snackbar-notifications/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/snackbar-notifications/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/snackbar-notifications/**/*.ts",
+          "libs/snackbar-notifications/**/*.html",
+          "libs/snackbar-notifications/package.json"
+        ]
+      }
+    }
+  }
+}

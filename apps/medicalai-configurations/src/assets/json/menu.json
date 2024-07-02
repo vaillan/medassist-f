@@ -1,0 +1,43 @@
+{
+  "off_session": [],
+  "on_session_admin": [
+    {
+      "title": "Usuarios",
+      "link": "med/users",
+      "icon": "badge"
+    },
+    {
+      "title": "Configuración Permisos",
+      "icon": "settings",
+      "child":[
+        {
+          "title": "Usuarios",
+          "link": "med/permissions",
+          "icon": "keyboard_option_key"
+        },
+        {
+          "title": "Grupos",
+          "link": "med/permissions/groups",
+          "icon": "keyboard_option_key"
+        }
+      ]
+    }
+  ],
+  "on_session_classic": [
+    {
+      "title": "Profile",
+      "link": "page/profile",
+      "icon": "manage_accounts"
+    },
+    {
+      "title": "NeoBot",
+      "link": "page/assistant",
+      "icon": "code"
+    },
+    {
+      "title": "Configuración",
+      "link": "page/subscription",
+      "icon": "payments"
+    }
+  ]
+}

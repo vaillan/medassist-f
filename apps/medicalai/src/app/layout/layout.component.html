@@ -1,0 +1,12 @@
+<monorepo-v-nav
+  [navItems]="nav"
+  [themeMode]="theme | async"
+  (themeChange)="onThemeChanged($event)"
+  [isLogged]="sharedService.isLogged$ | async"
+  [whatsappButtonActivated]="false"
+  [sidenavTitle]="sidebarTitle"
+  [headerTitle]="'Powered by Google AI'"
+  [vissibleSinavWithLoggStatus]="true"
+  [loginRoute]="'/med/auth'"
+  (logOutChange)="logOut($event)"
+></monorepo-v-nav>

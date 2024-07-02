@@ -1,0 +1,80 @@
+<mat-toolbar color="primary" class="header">
+  <mat-toolbar-row class="mat-elevation-z4">
+    <ng-container *ngIf="(isHandset$ | async) && validateSidenavWithLogStatus; else NotHandset">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </ng-container>
+
+    <ng-template #NotHandset>
+      <ng-container *ngIf="validateSidenavWithLogStatus">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle(); fullScreen()"
+        >
+          <mat-icon aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
+        </button>
+      </ng-container>
+    </ng-template>
+    &nbsp;
+    <mat-chip-listbox>
+      <mat-chip-option [disabled]="true">{{ headerTitle }}</mat-chip-option>
+    </mat-chip-listbox>
+    <span class="header-spacer"></span>
+    <div>
+      <monorepo-v-menu
+        [themeMode]="themeMode"
+        (switchMode)="onThemeChange($event)"
+      ></monorepo-v-menu>
+    </div>
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label=""
+      matTooltip="Nav menu"
+      (click)="toolbarNav(toolbarNavIcon)"
+    >
+      <mat-icon>{{ toolbarNavIcon }}</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label=""
+      matTooltip="Full screen"
+      (click)="screen(fullScreenIcon)"
+    >
+      <mat-icon>{{ fullScreenIcon }}</mat-icon>
+    </button>
+    <a
+      mat-button
+      *ngIf="!isLogged"
+      href="javascript:void(0)"
+      [routerLink]="loginRoute"
+      routerLinkActive="active"
+      >Sign in</a
+    >
+
+    <a
+      mat-button
+      *ngIf="isLogged"
+      href="javascript:void(0)"
+      routerLinkActive="active"
+      (click)="logOut()"
+      >Log out</a
+    >
+  </mat-toolbar-row>
+
+  <mat-toolbar-row *ngIf="toolbarNavState">
+    <ng-template [ngIf]="toolbarNavState">
+      <monorepo-v-breadcrumb></monorepo-v-breadcrumb>
+      <span class="header-spacer"></span>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>

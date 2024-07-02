@@ -1,0 +1,259 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// import our custom theme
+@import "../src/assets/styles/theme.scss";
+
+// import custom component themes
+@import "../src/assets/styles/custom-component-themes.scss";
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// @import "prismjs/themes/prism-coy";
+@import "prismjs/themes/prism-tomorrow";
+@import "prismjs/plugins/autolinker/prism-autolinker";
+@import "prismjs/plugins/toolbar/prism-toolbar";
+@import "prismjs/plugins/line-numbers/prism-line-numbers";
+@import "prismjs/plugins/inline-color/prism-inline-color";
+/* You can add global styles to this file, and also import other style files */
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+
+@include mat.all-component-themes($theming-material-components-theme);
+@include custom-components-theme($theming-material-components-theme);
+
+// ? added
+
+// Include the dark color styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.dark-theme` will be affected by this alternate dark theme instead of the default theme.
+
+.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+}
+
+// Override typography for all Angular Material, including mat-base-typography and all components.
+// @include mat.typography-hierarchy($typography);
+
+// ? added
+$char: #292929;
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.porfolio-spacer {
+  flex: 1 1 auto;
+}
+
+.header {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  width: 100%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-drawer {
+  width: 250px !important;
+}
+
+
+/*
+ * General styles
+ */
+
+::ng-deep .mat-form-field {
+  width: 100%;
+}
+
+.box-img {
+  display: block;
+  width: 100%;
+  height: 500px;
+}
+
+.header-spacer {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+//--
+.intro-portfolio {
+  font-size: 15px;
+}
+
+.custom-display-3 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgb(0 0 0 / 0%);
+  position: relative;
+  z-index: 0;
+}
+
+.c-1 {
+  color: rgb(203 12 159) !important;
+}
+
+
+.text-gradient.c-1 {
+  background-image: linear-gradient(310deg, rgb(121 40 202), rgb(255 0 128));
+}
+
+.align-selft-center {
+  align-self: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.card-skill {
+  background-color: none;
+  background-image: linear-gradient(310deg, #7928ca, #ff0080);
+  color: #dee2e6;
+}
+
+.fit-width-card {
+  width: max-content;
+  height: max-content;
+}
+
+.l-radius {
+  border-radius: 5px;
+}
+
+.view-port-80 {
+  height: 80vh;
+}
+
+.card {
+  width: 100%;
+}
+
+
+/* Structure */
+.example-container {
+  position: relative;
+}
+
+.example-table-container {
+  position: relative;
+  min-height: auto;
+  max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-rate-limit-reached {
+  max-width: 360px;
+  text-align: center;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
+}
+
+//custom
+.ms-container {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-height: calc(100vh - (var(--mat-toolbar-standard-height) + var(--mat-toolbar-standard-height)));
+}
+
+h1.example-app-name {
+  margin-left: 8px;
+}
+
+.ms-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+
+
+/* Structure Table*/
+.table-content {
+  position: relative;
+}
+
+.table-container {
+  position: relative;
+  min-height: auto;
+  max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
+}

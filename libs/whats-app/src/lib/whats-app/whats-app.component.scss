@@ -1,0 +1,35 @@
+.whats-app {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 180px;
+  max-width: auto;
+}
+
+.msg-content {
+  display: block;
+  background-color: ghostwhite;
+  padding: 5px;
+  width: fit-content;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-top: 10px solid ghostwhite;
+  border-right: 10px solid ghostwhite;
+  border-bottom: 10px solid transparent;
+  transform: translate(-20px, -19%);
+  position: fixed;
+}
+
+.whats-app-header-radius {
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+
+.whats-app-card-radius {
+  border-radius: 10px !important;
+}

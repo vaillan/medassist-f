@@ -1,0 +1,1 @@
+export declare type SnackBarAction = "success" | "warning" | "danger";

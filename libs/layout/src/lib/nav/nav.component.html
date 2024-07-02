@@ -1,0 +1,111 @@
+<div class="sidenav-container">
+  <!-- Header -->
+  <monorepo-v-header
+    [drawer]="drawer"
+    [themeMode]="t"
+    (themeChanged)="onThemeChanged($event)"
+    [isLogged]="isLogged"
+    [iconMenuMode]="opened"
+    [loginRoute]="loginRoute"
+    [vissibleSinavWithLoggStatus]="vissibleSinavWithLoggStatus"
+    [headerTitle]="headerTitle"
+    (logOutChange)="logOut($event)"
+  ></monorepo-v-header>
+  <!-- Container -->
+  <mat-sidenav-container class="s-container">
+    <mat-sidenav
+      #drawer
+      class="sidenav bg-center"
+      [fixedInViewport]="false"
+      [class.mat-elevation-z0]="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false ? opened : true"
+    >
+      <mat-toolbar>
+        <mat-toolbar-row>
+          <span class="text-sm">{{ sidenavTitle }}</span>
+          <span class="nav-spacer"></span>
+          <mat-icon aria-hidden="false">settings</mat-icon>
+        </mat-toolbar-row>
+        <mat-toolbar-row *ngIf="isHandset$ | async">
+          <a
+            mat-icon-button
+            matTooltip="Facebook"
+            href="https://www.facebook.com/VOS9303"
+            target="_blank"
+          >
+            <fa-icon
+              [icon]="['fab', 'facebook']"
+              style="transform: scale(1.2) !important"
+            ></fa-icon>
+          </a>
+          <a
+            mat-icon-button
+            matTooltip="Github"
+            href="https://github.com/vaillan"
+            target="_blank"
+          >
+            <fa-icon
+              [icon]="['fab', 'github']"
+              style="transform: scale(1.2) !important"
+            ></fa-icon>
+          </a>
+          <a
+            mat-icon-button
+            matTooltip="Linkedin"
+            href="https://www.linkedin.com/in/valentin-ortiz"
+            target="_blank"
+          >
+            <fa-icon
+              [icon]="['fab', 'linkedin']"
+              style="transform: scale(1.2) !important"
+            ></fa-icon>
+          </a>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-nav-list>
+        <ng-container *ngFor="let nav of navItems">
+          <mat-list-item
+            routerLink="{{ nav.link }}"
+            *ngIf="!nav.child?.length; else navChild"
+          >
+            <mat-icon matListItemIcon>{{ nav.icon }}</mat-icon>
+            <div matListItemTitle>{{ nav.title }}</div>
+          </mat-list-item>
+          <ng-template #navChild>
+            <mat-accordion class="global-nav" multi>
+              <mat-expansion-panel [class.mat-elevation-z0]="true">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{ nav.title }}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                  <a
+                    mat-list-item
+                    routerLink="{{ navChildItem.link }}"
+                    *ngFor="let navChildItem of nav.child"
+                  >
+                    <mat-icon matListItemIcon>{{ navChildItem.icon }}</mat-icon>
+                    <div matListItemTitle>{{ navChildItem.title }}</div>
+                  </a>
+                </mat-nav-list>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </ng-template>
+        </ng-container>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <!-- Add Content Here -->
+      <div class="container mx-auto px-4 min-h-full pt-1">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <!-- Footer -->
+  <monorepo-v-footer
+    [whatsappButtonActivated]="whatsappButtonActivated"
+  ></monorepo-v-footer>
+</div>

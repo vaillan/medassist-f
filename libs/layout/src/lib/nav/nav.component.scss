@@ -1,0 +1,46 @@
+::ng-deep .sidenav {
+  width: 230px;
+}
+
+::ng-deep .sidenav .mat-toolbar {
+  background: inherit;
+}
+
+::ng-deep .mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+::ng-deep .user-icon {
+  padding: 0 14px;
+}
+
+::ng-deep .mx-0 {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.nav-spacer {
+  flex: 1 1 auto;
+}
+
+::ng-deep .s-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+::ng-deep .sidenav-container  {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+::ng-deep .global-nav .mat-expansion-panel .mat-expansion-panel-body {
+  padding: 0px !important;
+}

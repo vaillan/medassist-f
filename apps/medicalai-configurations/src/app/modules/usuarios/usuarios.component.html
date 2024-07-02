@@ -1,0 +1,75 @@
+<div class="justify-center min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
+  <div class="flex flex-row-reverse gap-2 mt-2 mb-2">
+    <div>
+      <button mat-mini-fab matTooltip="Add new user" color="primary" [routerLink]="'create'">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button mat-mini-fab matTooltip="Refresh data source" color="primary" (click)="refresh()" [disabled]="usuariosDataSource.length !== 0">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="grid grid-cols-1 mt-5">
+    <div class="col-span-1">
+      <div class="table-content mat-elevation-z0">
+        <div class="table-container">
+          <table mat-table [dataSource]="usuariosDataSource" class="mat-elevation-z8" (scroll)="onTableScroll($event)">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="username">
+              <th mat-header-cell *matHeaderCellDef>Nombre de usuario</th>
+              <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="first_name">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td mat-cell *matCellDef="let element">{{ element.first_name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="last_name">
+              <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+              <td mat-cell *matCellDef="let element">{{ element.last_name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>Correo electronico</th>
+              <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="created_at">
+              <th mat-header-cell *matHeaderCellDef>Fecha creacion</th>
+              <td mat-cell *matCellDef="let element">{{ element.created_at | date }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button [routerLink]="'edit/'+element.id">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="deleteUser(element.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

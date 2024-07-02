@@ -1,0 +1,27 @@
+{
+    "off_session": [],
+    "on_session_admin": [
+        {
+            "title": "Profile",
+            "link": "med/profile",
+            "icon": "manage_accounts"
+        },
+        {
+            "title": "MedBot",
+            "link": "med/assistant",
+            "icon": "code"
+        }
+    ],
+    "on_session_classic": [
+        {
+            "title": "Profile",
+            "link": "med/profile",
+            "icon": "manage_accounts"
+        },
+        {
+            "title": "MedBot",
+            "link": "med/assistant",
+            "icon": "code"
+        }
+    ]
+}

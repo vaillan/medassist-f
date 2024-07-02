@@ -1,0 +1,53 @@
+<mat-toolbar color="primary" class="footer">
+  <mat-toolbar-row style="white-space: pre-wrap">
+    <!-- <button type="button" aria-label="Toggle sidenav" mat-icon-button>
+      <mat-icon aria-label="Side nav toggle icon">public</mat-icon>
+    </button> -->
+    <mat-chip-listbox>
+      <mat-chip-option [disabled]="true">{{ version }}</mat-chip-option>
+    </mat-chip-listbox>
+
+    <span class="footer-spacer"></span>
+    <ng-template [ngIf]="(isHandset$ | async) !== true">
+      <div class="grid-center col">
+        <a
+          mat-icon-button
+          matTooltip="Facebook"
+          href="https://www.facebook.com/VOS9303"
+          target="_blank"
+        >
+          <fa-icon
+            [icon]="['fab', 'facebook']"
+            style="transform: scale(1.2) !important"
+          ></fa-icon>
+        </a>
+        <a
+          mat-icon-button
+          matTooltip="Github"
+          href="https://github.com/vaillan"
+          target="_blank"
+        >
+          <fa-icon
+            [icon]="['fab', 'github']"
+            style="transform: scale(1.2) !important"
+          ></fa-icon>
+        </a>
+        <a
+          mat-icon-button
+          matTooltip="Linkedin"
+          href="https://www.linkedin.com/in/valentin-ortiz"
+          target="_blank"
+        >
+          <fa-icon
+            [icon]="['fab', 'linkedin']"
+            style="transform: scale(1.2) !important"
+          ></fa-icon>
+        </a>
+      </div>
+    </ng-template>
+    <span class="footer-spacer"></span>
+    <ng-template [ngIf]="whatsappButtonActivated">
+      <monorepo-v-whats-app></monorepo-v-whats-app>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>

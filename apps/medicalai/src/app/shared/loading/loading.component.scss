@@ -1,0 +1,6 @@
+::ng-deep .loading {
+  .mdc-dialog__surface {
+    background: transparent !important;
+    box-shadow: unset !important;
+  }
+}

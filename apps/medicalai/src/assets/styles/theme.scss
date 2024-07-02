@@ -1,0 +1,150 @@
+// src/theme.scss
+@use "sass:map";
+@use "@angular/material" as mat;
+@include mat.core();
+@import "../styles/variables.scss";
+
+//Typography
+// ? 3. Define a custom heading typography config
+$heading-font-family: Jost, Roboto;
+
+$typography: mat.define-typography-config(
+  $headline-1: mat.define-typography-level(112px, 112px, 300, $font-family: $heading-font-family, $letter-spacing: -0.05em),
+  $headline-2: mat.define-typography-level(56px, 56px, 400, $font-family: $heading-font-family, $letter-spacing: -0.02em),
+  $headline-3: mat.define-typography-level(45px, 48px, 400, $font-family: $heading-font-family, $letter-spacing: -0.005em),
+  $headline-4: mat.define-typography-level(34px, 40px, 400),
+  $headline-5: mat.define-typography-level(24px, 32px, 400),
+);
+
+
+/*
+* Light theme
+*/
+$theme-primary: mat.define-palette($mat-primary, 700);
+$theme-accent: mat.define-palette($mat-secondary, 700);
+$theme-warn: mat.define-palette($mat-warn, 700);
+
+// Background palette for light themes.
+$theme-light-background-palette: (
+  status-bar: map.get($grey-palette, 300),
+  app-bar: #fff,
+  background: map.get($grey-palette, 50),
+  hover: rgba(#243b53, 0.04),
+  card: #fff,
+  dialog: #fff,
+  disabled-button: rgba(#243b53, 0.12),
+  raised-button: #fff,
+  focused-button: $dark-focused,
+  selected-button: map.get($grey-palette, 300),
+  selected-disabled-button: map.get($grey-palette, 400),
+  disabled-button-toggle: map.get($grey-palette, 200),
+  unselected-chip: map.get($grey-palette, 200),
+  disabled-list-option: map.get($grey-palette, 200),
+  tooltip: map.get($grey-palette, 700),
+);
+
+// Foreground palette for light themes.
+$theme-light-foreground-palette: (
+  base: #243b53,
+  divider: $dark-dividers,
+  dividers: $dark-dividers,
+  disabled: $dark-disabled-text,
+  disabled-button: rgba(#243b53, 0.26),
+  disabled-text: $dark-disabled-text,
+  elevation: #243b53,
+  hint-text: $dark-disabled-text,
+  secondary-text: $dark-secondary-text,
+  icon: rgba(#243b53, 0.54),
+  icons: rgba(#243b53, 0.54),
+  text: rgba(#243b53, 0.87),
+  slider-min: rgba(#243b53, 0.87),
+  slider-off: rgba(#243b53, 0.26),
+  slider-off-active: rgba(#243b53, 0.38),
+);
+
+@function mat-light-theme($config) {
+  $theme: mat.define-light-theme($config);
+  $color: map.get($theme, color);
+  $color: map.merge($color,
+      (background: $theme-light-background-palette,
+        foreground: $theme-light-foreground-palette,
+      ));
+  @return map.merge($theme,
+    (color: $color,
+    ));
+}
+
+//Define an default light theme.
+$theming-material-components-theme: mat-light-theme((
+      color: (primary: $theme-primary,
+        accent: $theme-accent,
+        warn: $theme-warn,
+      ),
+      typography: $typography,
+      density: 0,
+    ));
+
+/*
+* Dark theme
+*/
+$dark-primary:mat.define-palette($mat-primary, 700);
+$dark-accent: mat.define-palette($mat-secondary, 700);
+$dark-warn: mat.define-palette($mat-warn, 700);
+
+$theme-dark-background-palette: (
+  status-bar: #2a3447,
+  app-bar: map.get($night-palette, 800),
+  background: #2a3447,
+  hover: rgba(#fff, 0.04),
+  card: map.get($night-palette, 800),
+  dialog: map.get($night-palette, 800),
+  disabled-button: rgba(#fff, 0.12),
+  raised-button: map.get($night-palette, 800),
+  focused-button: $light-focused,
+  selected-button: map.get($night-palette, 900),
+  selected-disabled-button: map.get($night-palette, 800),
+  disabled-button-toggle: #243b53,
+  unselected-chip: map.get($night-palette, 700),
+  disabled-list-option: #243b53,
+  tooltip: map.get($night-palette, 700),
+);
+
+$theme-dark-foreground-palette: (
+  base: #fff,
+  divider: $light-dividers,
+  dividers: $light-dividers,
+  disabled: $light-disabled-text,
+  disabled-button: rgba(#fff, 0.3),
+  disabled-text: $light-disabled-text,
+  elevation: black,
+  hint-text: $light-disabled-text,
+  secondary-text: $light-secondary-text,
+  icon: #94a3b8,
+  icons: #94a3b8,
+  text: #94a3b8,
+  slider-min: #fff,
+  slider-off: rgba(#fff, 0.3),
+  slider-off-active: rgba(#fff, 0.3),
+);
+
+@function mat-dark-theme($config) {
+  $theme: mat.define-dark-theme($config);
+  $color: map.get($theme, color);
+  $color: map.merge($color,
+      (background: $theme-dark-background-palette,
+        foreground: $theme-dark-foreground-palette,
+      ));
+  @return map.merge($theme,
+    (color: $color,
+    ));
+}
+
+
+$dark-theme: mat-dark-theme((
+      color: (primary: $dark-primary,
+        accent: $dark-accent,
+        warn: $dark-warn,
+      ),
+      typography: $typography,
+      density: 0,
+    ));

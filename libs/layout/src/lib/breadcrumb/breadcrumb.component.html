@@ -1,0 +1,8 @@
+<xng-breadcrumb [separator]="iconTemplate">
+  <ng-container *xngBreadcrumbItem="let breadcrumb">
+    <ng-container><p class="text-sm">{{ breadcrumb }}</p></ng-container>
+  </ng-container>
+</xng-breadcrumb>
+<ng-template #iconTemplate>
+  <mat-icon>arrow_right</mat-icon>
+</ng-template>
