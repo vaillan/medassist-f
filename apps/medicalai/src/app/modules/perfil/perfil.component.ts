@@ -35,8 +35,6 @@ export class PerfilComponent implements OnInit, OnDestroy {
             telefono: [null, Validators.nullValidator],
             puesto: [null, Validators.required],
             departamento: [null, Validators.required],
-            fecha_contratacion: [null, Validators.nullValidator],
-            salario: [null, Validators.nullValidator],
             nombre_relacion_contacto_emergencia: [
                 null,
                 Validators.nullValidator,
@@ -45,18 +43,6 @@ export class PerfilComponent implements OnInit, OnDestroy {
                 null,
                 Validators.nullValidator,
             ],
-            alergias: [null, Validators.nullValidator],
-            medicamentos_recetados: [null, Validators.nullValidator],
-            condiciones_medicas_preexistentes: [null, Validators.nullValidator],
-            cobertura_seguro_medico: [null, Validators.nullValidator],
-            cobertura_seguro_dental: [null, Validators.nullValidator],
-            cobertura_seguro_vision: [null, Validators.nullValidator],
-            beneficios_jubilacion: [null, Validators.nullValidator],
-            estado_civil: [null, Validators.nullValidator],
-            numero_dependientes: [null, Validators.nullValidator],
-            educacion: [null, Validators.nullValidator],
-            certificaciones: [null, Validators.nullValidator],
-            licencias: [null, Validators.nullValidator],
             is_staff: [null, Validators.required],
             is_superuser: [null, Validators.required],
             groups: [null, Validators.required],
@@ -89,11 +75,11 @@ export class PerfilComponent implements OnInit, OnDestroy {
      */
     private disbleControls(): void {
         // Deshabilitar los controles del formulario
-        this.editUserForm.controls['puesto'].disable();
-        this.editUserForm.controls['departamento'].disable();
-        this.editUserForm.controls['groups'].disable();
-        this.editUserForm.controls['is_staff'].disable();
-        this.editUserForm.controls['is_superuser'].disable();
+        // this.editUserForm.controls['puesto'].disable();
+        // this.editUserForm.controls['departamento'].disable();
+        // this.editUserForm.controls['groups'].disable();
+        // this.editUserForm.controls['is_staff'].disable();
+        // this.editUserForm.controls['is_superuser'].disable();
     }
 
     ngOnInit(): void {
@@ -199,25 +185,10 @@ export class PerfilComponent implements OnInit, OnDestroy {
             telefono: userData?.telefono,
             puesto: userData?.puesto,
             departamento: userData?.departamento,
-            fecha_contratacion: userData?.fecha_contratacion,
-            salario: userData?.salario,
             nombre_relacion_contacto_emergencia:
                 userData?.nombre_relacion_contacto_emergencia,
             numero_telefono_contacto_emergencia:
                 userData?.numero_telefono_contacto_emergencia,
-            alergias: userData?.alergias,
-            medicamentos_recetados: userData?.medicamentos_recetados,
-            condiciones_medicas_preexistentes:
-                userData?.condiciones_medicas_preexistentes,
-            cobertura_seguro_medico: userData?.cobertura_seguro_medico,
-            cobertura_seguro_dental: userData?.cobertura_seguro_dental,
-            cobertura_seguro_vision: userData?.cobertura_seguro_vision,
-            beneficios_jubilacion: userData?.beneficios_jubilacion,
-            estado_civil: userData?.estado_civil,
-            numero_dependientes: userData?.numero_dependientes,
-            educacion: userData?.educacion,
-            certificaciones: userData?.certificaciones,
-            licencias: userData?.licencias,
             is_staff: userData?.is_staff,
             is_superuser: userData?.is_superuser,
             groups: userData?.groups,

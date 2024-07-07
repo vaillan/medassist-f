@@ -6,10 +6,12 @@ import { LoginComponent } from './login/login.component';
 import { MaterialModule } from '@myorg/material';
 import { SnackbarNotificationsModule } from '@myorg/snackbar-notifications';
 import { BreadcrumbModule } from 'xng-breadcrumb';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

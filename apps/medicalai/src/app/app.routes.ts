@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { PublicGuard } from './core/guards/public.guard';
 import { AuthGuard } from './core/guards/auth.guard';
+import { AssistantComponent } from './modules/assistant/assistant.component';
 
 export const appRoutes: Route[] = [
     {
@@ -39,6 +40,10 @@ export const appRoutes: Route[] = [
                             ),
                         canMatch: [AuthGuard],
                     },
+                    {
+                        path: 'assistant',
+                        component: AssistantComponent
+                    }
                 ],
                 data: {
                     breadcrumb: 'Smart Medical',

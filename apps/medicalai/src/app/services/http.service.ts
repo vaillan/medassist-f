@@ -275,4 +275,121 @@ export class HttpService {
             })
         );
     }
+
+    /**
+     * Crea un nuevo usuario.
+     *
+     * @param params Los datos del usuario a crear.
+     * @returns Un observable con la respuesta del servidor.
+     */
+    createUser(params: object): Observable<any> {
+        const options = Options;
+        const route = `${this.BaseUrl}/create_user`;
+        return this.http.post(route, params, options).pipe(
+            map((data) => {
+                return data;
+            }),
+            catchError((error) => {
+                this.notificationsService.openSnackBar(
+                    error.error.detail,
+                    'right',
+                    'bottom',
+                    9000,
+                    'danger'
+                );
+                return throwError(() => error);
+            })
+        );
+    }
+
+    /**
+     * Elimina un usuario.
+     *
+     * @param user_id El ID del usuario a eliminar.
+     * @returns Un observable con la respuesta del servidor.
+     */
+    deleteUser(user_id: number): Observable<any> {
+        const options = Options;
+        const route = `${this.BaseUrl}/delete_user/${user_id}`;
+        return this.http.delete(route, options).pipe(
+            map((data) => {
+                return data;
+            }),
+            catchError((error) => {
+                this.notificationsService.openSnackBar(
+                    error.error.detail,
+                    'right',
+                    'bottom',
+                    9000,
+                    'danger'
+                );
+                return throwError(() => error);
+            })
+        );
+    }
+
+    /**
+     * Registra un nuevo usuario.
+     *
+     * @param params Los datos del usuario a crear.
+     * @returns Un observable con la respuesta del servidor.
+     */
+    register(params: object): Observable<any> {
+        const options = Options;
+        const route = `${this.BaseUrl}/register`;
+        return this.http.post(route, params, options).pipe(
+            map((data) => {
+                return data;
+            }),
+            catchError((error) => {
+                this.notificationsService.openSnackBar(
+                    error.error.detail,
+                    'right',
+                    'bottom',
+                    9000,
+                    'danger'
+                );
+                return throwError(() => error);
+            })
+        );
+    }
+
+    consultAssistant(params: object): Observable<any> {
+        const options = Options;
+        const route = `${this.BaseUrl}/genai_generate_content`;
+        return this.http.post(route, params, options).pipe(
+            map((data: any) => {
+                return data;
+            }),
+            catchError((error) => {
+                return throwError(() => error);
+            })
+        );
+    }
+
+    getUserThreads(user_id: number): Observable<any> {
+        const options = Options;
+        const route = `${this.BaseUrl}/user_threads/${user_id}`;
+        return this.http.get(route, options).pipe(
+            map((data: any) => {
+                return data;
+            }),
+            catchError((error) => {
+                return throwError(() => error);
+            })
+        );
+    }
+
+    deleteThread(thread_id: number): Observable<any> {
+        const options = Options;
+        const route = `${this.BaseUrl}/delete_thread/${thread_id}`;
+        return this.http.delete(route, options).pipe(
+            map((data: any) => {
+                return data;
+            }),
+            catchError((error) => {
+                return throwError(() => error);
+            })
+        );
+    }
 }

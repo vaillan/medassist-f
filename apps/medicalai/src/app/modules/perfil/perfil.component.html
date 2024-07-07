@@ -33,7 +33,7 @@
                 </mat-form-field>
             </div>
             <div>
-                <div class="w-full">
+                <ng-template class="w-full" [ngIf]="editUserForm.value['is_staff']">
                     <label>Miembro del equipo?</label>
                     <mat-radio-group formControlName="is_staff">
                         <mat-radio-button class="example-margin" [value]="true"
@@ -43,7 +43,7 @@
                             >No</mat-radio-button
                         >
                     </mat-radio-group>
-                </div>
+                </ng-template>
             </div>
         </div>
         <h1 class="mt-5 mb-5 font-semibold text-lg">Identificación:</h1>
@@ -148,35 +148,6 @@
                     <input matInput formControlName="departamento" />
                 </mat-form-field>
             </div>
-            <div>
-                <mat-form-field class="w-full">
-                    <input
-                        matInput
-                        [matDatepicker]="picker"
-                        placeholder="Fecha contratacion"
-                        formControlName="fecha_contratacion"
-                    />
-                    <mat-datepicker-toggle
-                        matSuffix
-                        [for]="picker"
-                    ></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="w-full" floatLabel="always">
-                    <mat-label>Salario</mat-label>
-                    <input
-                        matInput
-                        type="number"
-                        class="right-align"
-                        placeholder="0"
-                        formControlName="salario"
-                    />
-                    <span matTextPrefix>$&nbsp;</span>
-                    <span matTextSuffix>.00</span>
-                </mat-form-field>
-            </div>
         </div>
         <h1 class="mt-5 mb-5 font-semibold text-lg">Contacto de emergencia:</h1>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -200,107 +171,6 @@
                         formControlName="numero_telefono_contacto_emergencia"
                     />
                     <mat-icon matSuffix>contact_phone</mat-icon>
-                </mat-form-field>
-            </div>
-        </div>
-        <h1 class="mt-5 mb-5 font-semibold text-lg">Información médica:</h1>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div>
-                <mat-form-field class="w-full">
-                    <mat-label>Alergias</mat-label>
-                    <input matInput formControlName="alergias" />
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="w-full">
-                    <mat-label>Medicamentos recetados</mat-label>
-                    <input matInput formControlName="medicamentos_recetados" />
-                </mat-form-field>
-            </div>
-            <div class="col-span-1 md:col-span-2">
-                <mat-form-field class="w-full">
-                    <mat-label>Condiciones medicas preexistentes</mat-label>
-                    <input
-                        matInput
-                        formControlName="condiciones_medicas_preexistentes"
-                    />
-                </mat-form-field>
-            </div>
-        </div>
-        <h1 class="mt-5 mb-5 font-semibold text-lg">Beneficios:</h1>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div>
-                <mat-form-field class="w-full">
-                    <mat-label>Cobertura de seguro medico</mat-label>
-                    <input matInput formControlName="cobertura_seguro_medico" />
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="w-full">
-                    <mat-label>Cobertura de seguro dental</mat-label>
-                    <input matInput formControlName="cobertura_seguro_dental" />
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="w-full">
-                    <mat-label>Cobertura de seguro vision</mat-label>
-                    <input matInput formControlName="cobertura_seguro_vision" />
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="w-full">
-                    <mat-label>Beneficios de jubilacion</mat-label>
-                    <input matInput formControlName="beneficios_jubilacion" />
-                </mat-form-field>
-            </div>
-        </div>
-        <h1 class="mt-5 mb-5 font-semibold text-lg">Información adicional:</h1>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div>
-                <mat-form-field class="w-full">
-                    <mat-label>Estado civil</mat-label>
-                    <input matInput formControlName="estado_civil" />
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="w-full">
-                    <mat-label>Numero dependientes</mat-label>
-                    <input
-                        matInput
-                        type="number"
-                        formControlName="numero_dependientes"
-                    />
-                </mat-form-field>
-            </div>
-            <div class="col-span-1 md:col-span-1 md:col-span-2">
-                <mat-form-field class="w-full">
-                    <mat-label>Licencias</mat-label>
-                    <textarea
-                        matInput
-                        class="max-h-20"
-                        formControlName="licencias"
-                    ></textarea>
-                </mat-form-field>
-            </div>
-
-            <div class="col-span-1 md:col-span-2">
-                <mat-form-field class="w-full">
-                    <mat-label>Certificaciones</mat-label>
-                    <textarea
-                        matInput
-                        class="max-h-20"
-                        formControlName="certificaciones"
-                    ></textarea>
-                </mat-form-field>
-            </div>
-            <div class="col-span-1 md:col-span-2">
-                <mat-form-field class="w-full">
-                    <mat-label>Educacion</mat-label>
-                    <textarea
-                        matInput
-                        class="max-h-20"
-                        formControlName="educacion"
-                    ></textarea>
                 </mat-form-field>
             </div>
         </div>

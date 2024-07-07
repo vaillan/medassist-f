@@ -1,4 +1,4 @@
-# MonorepoV
+# Medical Asistant
 
 <a href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
@@ -19,3 +19,8 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+# Instalations:
+1. Use - node v20.11.0 (npm v10.2.4)
+2. Run - npm install --legacy-peer-deps
+3. Run - npx nx run medicalai:serve --configuration=development

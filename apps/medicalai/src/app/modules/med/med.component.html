@@ -3,43 +3,33 @@
       <div class="row-span-2 max-w-2xl">
         <div class="text-4xl font-semibold font-mono text-center">
           <p class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
-            Innovando el futuro de la atención médica
-            <!-- Implementa
-            <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500"
-              >mejoras </span
-            > algorítmicas <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500"
-              >inteligentes potenciadas por la </span
-            > 
-            tecnología
-            <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500"
-              >de la</span
-            > inteligencia artificial -->
-
+            Innovando la atención médica
           </p>
         </div>
         <br />
         <p class="text-1xl font-medium font-mono text-center">
-          Identifica y resuelve errores, problemas de rendimiento, eficiencia,
-          estándares y optimización algorítmica con nuestra plataforma web impulsada
-          por
+            Medical Asistant IA is a tool at the service of health to analyze radiographic images powered by
           <span
             class="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-pink-500 to-violet-500"
-            >Google AI</span
+            >Gemini API</span
           >.
         </p>
       </div>
       <div class="col-span-1 max-w-md">
-        <div class="grid grid-cols-1 gap-4">
+        <div class="grid grid-cols-2 gap-4">
           <ng-template [ngIf]="(shareService.isLogged$ | async) !== true">
             <a mat-fab extended routerLink="/med/auth" class="w-full">
               <mat-icon>key</mat-icon>
               Login
             </a>
           </ng-template>
+          <ng-template [ngIf]="(shareService.isLogged$ | async) !== true">
+            <a mat-fab extended routerLink="/med/auth/register" class="w-full">
+              <mat-icon>app_registration</mat-icon>
+              Register
+            </a>
+          </ng-template>
         </div>
       </div>
     </div>
-  </div>  
+  </div>
