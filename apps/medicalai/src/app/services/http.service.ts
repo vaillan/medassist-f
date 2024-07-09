@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FileService } from './file.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Login } from '../core/interfaces/login';
@@ -355,6 +355,7 @@ export class HttpService {
     }
 
     consultAssistant(params: object): Observable<any> {
+        Options.headers = new HttpHeaders();
         const options = Options;
         const route = `${this.BaseUrl}/genai_generate_content`;
         return this.http.post(route, params, options).pipe(

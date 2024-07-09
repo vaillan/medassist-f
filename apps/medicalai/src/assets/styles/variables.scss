@@ -13,13 +13,17 @@ $border1: #919eab4d;
 $border2: #919eab05;
 
 $mat-primary: (
-  100: #ebf9fa,
-  500: #1e88e5,
-  700: #1e88e5,
+  100: #AFD3E2,
+  600: #1e88e5,
+  700: #19A7CE,
+  800: #7B66FF,
+  900: #146C94,
   contrast: (
     100: rgba(black, 0.87),
-    500: white,
+    600: white,
     700: white,
+    800: white,
+    900: white,
   ),
 );
 

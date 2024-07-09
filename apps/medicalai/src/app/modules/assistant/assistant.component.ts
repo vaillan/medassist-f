@@ -64,11 +64,11 @@ export class AssistantComponent implements OnInit, OnDestroy {
     userTreadsDatasource: Array<any> = [];
     content: Array<any> = [];
     files: File[] = [];
+    contentFiles: string = '';
     activarToolbar!: boolean;
     prismjsFlag: boolean = false;
     imageContentAvailable = false;
     hasImages = false;
-    contentFiles: string = '';
 
     user: any;
     geminiContent: any;
@@ -86,7 +86,7 @@ export class AssistantComponent implements OnInit, OnDestroy {
         );
         this.activarToolbar = true;
         this.assistantForm = this.fb.group({
-            instruccion: ['', Validators.required],
+            instruccion: [null, Validators.nullValidator],
             user_id: [this.user.id, Validators.required],
             thread_id: [null, Validators.nullValidator],
         });
@@ -97,34 +97,44 @@ export class AssistantComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
+        const formData = new FormData();
+        formData.append('user_id', `${this.assistantForm.value.user_id}`);
+        formData.append('thread_id', `${this.assistantForm.value.thread_id}`);
+        formData.append('instruccion', `${this.assistantForm.value.instruccion}`);
+
+        for (let index = 0; index < this.files.length; index++) {
+            const file = this.files[index];
+            formData.append('files', file, file.name);
+        }
+
         this.subscriptions.add(
-            this.httpService
-                .consultAssistant(this.assistantForm.value)
-                .subscribe({
-                    next: (res) => {
-                        this.assistantForm.patchValue({
-                            thread_id: res.gemini.id,
-                        });
-                        this.geminiContent = res.gemini;
-                    },
-                    error: (error) => {
-                        this.notificationService.openSnackBar(
-                            'Ha ocurrido un error, intentalo nuevamente',
-                            'end',
-                            'top',
-                            5000
-                        );
-                        console.error(error);
-                    },
-                    complete: () => {
-                        this.resetMarkdown();
-                        this.getGeminiContentResponse();
-                        this.getUserThreads();
-                        this.assistantForm.patchValue({
-                            instruccion: null,
-                        });
-                    },
-                })
+            this.httpService.consultAssistant(formData).subscribe({
+                next: (res) => {
+                    console.log(res)
+                    // this.assistantForm.patchValue({
+                    //     thread_id: res.gemini.id,
+                    // });
+                    // this.geminiContent = res.gemini;
+                },
+                error: (error) => {
+                    this.notificationService.openSnackBar(
+                        'Ha ocurrido un error, intentalo nuevamente',
+                        'end',
+                        'top',
+                        5000,
+                        'danger'
+                    );
+                    console.error(error);
+                },
+                complete: () => {
+                    // this.resetMarkdown();
+                    // this.getGeminiContentResponse();
+                    // this.getUserThreads();
+                    // this.assistantForm.patchValue({
+                    //     instruccion: null,
+                    // });
+                },
+            })
         );
     }
 
@@ -211,7 +221,8 @@ export class AssistantComponent implements OnInit, OnDestroy {
         if (e.isTrusted && e.target.files.length > 0) {
             for (let index = 0; index < e.target.files.length; index++) {
                 const file = e.target.files[index];
-                const find = (fileUploaded: File) => fileUploaded.name === file.name;
+                const find = (fileUploaded: File) =>
+                    fileUploaded.name === file.name;
                 const isUploaded = this.files.find(find);
                 if (!isUploaded) this.files.push(file);
                 this.showFile(file);
