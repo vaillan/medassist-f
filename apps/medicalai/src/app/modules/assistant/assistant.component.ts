@@ -61,17 +61,15 @@ export class AssistantComponent implements OnInit, OnDestroy {
 
     subscriptions: Subscription = new Subscription();
     assistantForm!: FormGroup;
+    geminiContent: Array<any>  = [];
     userTreadsDatasource: Array<any> = [];
-
     files: File[] = [];
-    contentFiles: string = '';
+
     activarToolbar!: boolean;
     prismjsFlag: boolean = false;
     imageContentAvailable = false;
     hasImages = false;
-
     user: any;
-    geminiContent: any;
 
     constructor(
         private fb: FormBuilder,
@@ -113,7 +111,6 @@ export class AssistantComponent implements OnInit, OnDestroy {
         this.subscriptions.add(
             this.httpService.consultAssistant(formData).subscribe({
                 next: (res) => {
-                    this.contentFiles = '';
                     this.assistantForm.patchValue({
                         thread_id: res.gemini.thread.id,
                     });
@@ -154,7 +151,6 @@ export class AssistantComponent implements OnInit, OnDestroy {
     }
 
     restartConversation(e: any) {
-        this.contentFiles = '';
         this.assistantForm.patchValue({
             thread_id: e.id,
         });
@@ -196,22 +192,24 @@ export class AssistantComponent implements OnInit, OnDestroy {
         });
         this.geminiContent = [];
         this.files = [];
-        this.contentFiles = '';
     }
 
     getGeminiContentResponse(content: any): void {
-        for (let i = 0; i < content.length; i++) {
-            let parts = `> * **${content[i].role}**\n`;
-            for (let iPart = 0; iPart < content[i].parts.length; iPart++) {
-                parts += `\n${content[i].parts[iPart]}\n`
+        this.geminiContent = [];
+        const _content: Array<any> = Array.from(content);
+        for (let i = 0; i < _content.length; i++) {
+            if(typeof _content[i].parts == 'object') {
+                let parts = `> * **${_content[i].role}**\n`;
+                for (let iPart = 0; iPart < _content[i].parts.length; iPart++) {
+                    parts += `\n${_content[i].parts[iPart]}\n`
+                }
+                _content[i].parts = parts;
             }
-            content[i].parts = parts;
         }
         this.geminiContent = content;
     }
 
     resetMarkdown(): void {
-        this.contentFiles = '';
         if (this.geminiContent.length > 0) {
             this.geminiContent = [];
             this.markdownComponent.data = null;
@@ -232,6 +230,7 @@ export class AssistantComponent implements OnInit, OnDestroy {
     }
 
     showFile(file: any) {
+        if(this.geminiContent.length == 0) this.geminiContent = [{role: 'user', parts: ''}];
         const mimeTypes = ['image/png'];
         // eslint-disable-next-line prefer-const
         let reader = new FileReader();
@@ -240,9 +239,9 @@ export class AssistantComponent implements OnInit, OnDestroy {
             const fileBody = mimeTypes.includes(file.type)
                 ? `![${file.name}](${e.target.result})`
                 : '';
-            this.contentFiles += `
-                > * **user**
-                > * **${file.name}**
+            this.geminiContent[0].parts += `
+                > * **user**\n
+                > * **${file.name}**\n
                 ${fileBody}
             `;
         };

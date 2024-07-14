@@ -72,17 +72,6 @@
                                 class="viewport"
                             >
                                 <div class="p-5">
-                                    <ng-template [ngIf]="contentFiles">
-                                        <div class="p-4">
-                                            <markdown
-                                                #markdownComponent
-                                                lineNumbers
-                                                [start]="1"
-                                                [data]="contentFiles"
-                                            ></markdown>
-                                        </div>
-                                    </ng-template>
-
                                     <ng-container
                                         *ngFor="let c of geminiContent"
                                     >
