@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '@myorg/material';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -14,6 +14,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { SnackbarNotificationsModule } from '@myorg/snackbar-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutComponent } from './layout/layout.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 @NgModule({
     declarations: [AppComponent, LayoutComponent,],
@@ -31,7 +32,13 @@ import { LayoutComponent } from './layout/layout.component';
         LayoutModule,
         SnackbarNotificationsModule,
     ],
-    providers: [],
+    providers: [
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: AuthInterceptorService,
+          multi: true,
+        },
+      ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

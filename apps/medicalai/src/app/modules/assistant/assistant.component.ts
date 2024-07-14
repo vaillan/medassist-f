@@ -62,7 +62,7 @@ export class AssistantComponent implements OnInit, OnDestroy {
     subscriptions: Subscription = new Subscription();
     assistantForm!: FormGroup;
     userTreadsDatasource: Array<any> = [];
-    content: Array<any> = [];
+
     files: File[] = [];
     contentFiles: string = '';
     activarToolbar!: boolean;
@@ -100,7 +100,10 @@ export class AssistantComponent implements OnInit, OnDestroy {
         const formData = new FormData();
         formData.append('user_id', `${this.assistantForm.value.user_id}`);
         formData.append('thread_id', `${this.assistantForm.value.thread_id}`);
-        formData.append('instruccion', `${this.assistantForm.value.instruccion}`);
+        formData.append(
+            'instruccion',
+            `${this.assistantForm.value.instruccion}`
+        );
 
         for (let index = 0; index < this.files.length; index++) {
             const file = this.files[index];
@@ -110,11 +113,11 @@ export class AssistantComponent implements OnInit, OnDestroy {
         this.subscriptions.add(
             this.httpService.consultAssistant(formData).subscribe({
                 next: (res) => {
-                    console.log(res)
-                    // this.assistantForm.patchValue({
-                    //     thread_id: res.gemini.id,
-                    // });
-                    // this.geminiContent = res.gemini;
+                    this.contentFiles = '';
+                    this.assistantForm.patchValue({
+                        thread_id: res.gemini.thread.id,
+                    });
+                    this.getGeminiContentResponse(res.gemini.thread.gemini);
                 },
                 error: (error) => {
                     this.notificationService.openSnackBar(
@@ -127,12 +130,11 @@ export class AssistantComponent implements OnInit, OnDestroy {
                     console.error(error);
                 },
                 complete: () => {
-                    // this.resetMarkdown();
-                    // this.getGeminiContentResponse();
-                    // this.getUserThreads();
-                    // this.assistantForm.patchValue({
-                    //     instruccion: null,
-                    // });
+                    this.resetMarkdown();
+                    this.getUserThreads();
+                    this.assistantForm.patchValue({
+                        instruccion: null,
+                    });
                 },
             })
         );
@@ -151,16 +153,15 @@ export class AssistantComponent implements OnInit, OnDestroy {
         );
     }
 
-    restartConversation(e: Threads) {
-        this.content = [];
+    restartConversation(e: any) {
+        this.contentFiles = '';
         this.assistantForm.patchValue({
             thread_id: e.id,
         });
-        this.geminiContent = e;
-        this.getGeminiContentResponse();
+        this.getGeminiContentResponse(e.gemini);
     }
 
-    deleteChat(e: Threads) {
+    deleteChat(e: any) {
         const THREAD = e;
         this.subscriptions.add(
             this.httpService.deleteThread(THREAD.id).subscribe({
@@ -188,31 +189,31 @@ export class AssistantComponent implements OnInit, OnDestroy {
     }
 
     clearBox(): void {
-        const mode = this.assistantForm.value.mode;
         this.assistantForm.reset({
             instruccion: null,
             user_id: this.user.id,
             thread_id: null,
         });
         this.geminiContent = [];
-        this.content = [];
         this.files = [];
         this.contentFiles = '';
     }
 
-    getGeminiContentResponse(): void {
-        this.geminiContent.gemini.contents.forEach((c: any) => {
-            c.parts.forEach((p: any) => {
-                if (p) {
-                    this.content.push({ role: c.role, text: p.text });
-                }
-            });
-        });
+    getGeminiContentResponse(content: any): void {
+        for (let i = 0; i < content.length; i++) {
+            let parts = `> * **${content[i].role}**\n`;
+            for (let iPart = 0; iPart < content[i].parts.length; iPart++) {
+                parts += `\n${content[i].parts[iPart]}\n`
+            }
+            content[i].parts = parts;
+        }
+        this.geminiContent = content;
     }
 
     resetMarkdown(): void {
-        if (this.content.length > 0) {
-            this.content = [];
+        this.contentFiles = '';
+        if (this.geminiContent.length > 0) {
+            this.geminiContent = [];
             this.markdownComponent.data = null;
         }
     }
@@ -240,7 +241,8 @@ export class AssistantComponent implements OnInit, OnDestroy {
                 ? `![${file.name}](${e.target.result})`
                 : '';
             this.contentFiles += `
-                # ${file.name}
+                > * **user**
+                > * **${file.name}**
                 ${fileBody}
             `;
         };
