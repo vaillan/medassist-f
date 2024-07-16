@@ -9,7 +9,7 @@
         {
             "title": "MedBot",
             "link": "med/assistant",
-            "icon": "code"
+            "icon": "radiology"
         }
     ],
     "on_session_classic": [
@@ -21,7 +21,7 @@
         {
             "title": "MedBot",
             "link": "med/assistant",
-            "icon": "code"
+            "icon": "medical_services"
         }
     ]
 }

@@ -33,6 +33,7 @@
                                         mat-icon-button
                                         matListItemMeta
                                         [matMenuTriggerFor]="menu"
+                                        matTooltip="Reset messages, delete messages"
                                     >
                                         <mat-icon>more_vert</mat-icon>
                                     </button>
@@ -42,7 +43,7 @@
                                             (click)="restartConversation(t)"
                                         >
                                             <mat-icon>cloud_download</mat-icon>
-                                            <span>Restart</span>
+                                            <span>Reset</span>
                                         </button>
                                         <button
                                             mat-menu-item
@@ -109,6 +110,7 @@
                                         matSuffix
                                         [matMenuTriggerFor]="menu"
                                         type="button"
+                                        matTooltip="Upload files, clear chat box"
                                     >
                                         <mat-icon>add_circle</mat-icon>
                                     </button>
@@ -142,6 +144,7 @@
                                         matSuffix
                                         type="submit"
                                         class="m-2"
+                                        matTooltip="Send message"
                                     >
                                         <mat-icon>send</mat-icon>
                                     </button>

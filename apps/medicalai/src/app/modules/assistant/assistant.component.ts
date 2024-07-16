@@ -61,14 +61,11 @@ export class AssistantComponent implements OnInit, OnDestroy {
 
     subscriptions: Subscription = new Subscription();
     assistantForm!: FormGroup;
-    geminiContent: Array<any>  = [];
+    geminiContent: Array<any> = [];
     userTreadsDatasource: Array<any> = [];
     files: File[] = [];
 
     activarToolbar!: boolean;
-    prismjsFlag: boolean = false;
-    imageContentAvailable = false;
-    hasImages = false;
     user: any;
 
     constructor(
@@ -127,11 +124,11 @@ export class AssistantComponent implements OnInit, OnDestroy {
                     console.error(error);
                 },
                 complete: () => {
-                    this.resetMarkdown();
                     this.getUserThreads();
                     this.assistantForm.patchValue({
                         instruccion: null,
                     });
+                    this.files = [];
                 },
             })
         );
@@ -195,13 +192,12 @@ export class AssistantComponent implements OnInit, OnDestroy {
     }
 
     getGeminiContentResponse(content: any): void {
-        this.geminiContent = [];
         const _content: Array<any> = Array.from(content);
         for (let i = 0; i < _content.length; i++) {
-            if(typeof _content[i].parts == 'object') {
+            if (typeof _content[i].parts == 'object') {
                 let parts = `> * **${_content[i].role}**\n`;
                 for (let iPart = 0; iPart < _content[i].parts.length; iPart++) {
-                    parts += `\n${_content[i].parts[iPart]}\n`
+                    parts += `\n${_content[i].parts[iPart]}\n`;
                 }
                 _content[i].parts = parts;
             }
@@ -230,7 +226,6 @@ export class AssistantComponent implements OnInit, OnDestroy {
     }
 
     showFile(file: any) {
-        if(this.geminiContent.length == 0) this.geminiContent = [{role: 'user', parts: ''}];
         const mimeTypes = ['image/png'];
         // eslint-disable-next-line prefer-const
         let reader = new FileReader();
@@ -239,11 +234,15 @@ export class AssistantComponent implements OnInit, OnDestroy {
             const fileBody = mimeTypes.includes(file.type)
                 ? `![${file.name}](${e.target.result})`
                 : '';
-            this.geminiContent[0].parts += `
+
+            this.geminiContent.push({
+                role: 'user',
+                parts: `
                 > * **user**\n
                 > * **${file.name}**\n
                 ${fileBody}
-            `;
+            `,
+            });
         };
     }
 
