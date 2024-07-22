@@ -1,7 +1,0 @@
-// import custom components themes
-@import "../styles/borders";
-
-// you only have to add additional components here (instead of in every theme class)
-@mixin custom-components-theme($theme) {
-  @include theme($theme);
-}
