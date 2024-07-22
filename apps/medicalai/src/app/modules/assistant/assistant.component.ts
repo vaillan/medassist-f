@@ -114,10 +114,11 @@ export class AssistantComponent implements OnInit, OnDestroy {
                     this.getGeminiContentResponse(res.gemini.thread.gemini);
                 },
                 error: (error) => {
+                    console.log(error)
                     this.notificationService.openSnackBar(
-                        'Ha ocurrido un error, intentalo nuevamente',
+                        error.error.detail,
                         'end',
-                        'top',
+                        'bottom',
                         5000,
                         'danger'
                     );

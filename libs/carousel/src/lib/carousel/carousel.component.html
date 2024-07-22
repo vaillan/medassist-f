@@ -1,0 +1,49 @@
+<div class="flex items-center justify-center w-full h-full sm:py-8 px-4">
+    <div class="w-full relative flex items-center justify-center">
+        <button mat-icon-button class="absolute z-30 left-0" (click)="goPrev()">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        <div class="w-full h-full mx-auto overflow-hidden">
+
+            <div
+                id="slider"
+                class="text-center h-full flex lg:gap-4 md:gap-4 gap-4 items-center justify-self-start transition ease-out duration-700"
+            >
+                <ng-container *ngFor="let slide of slides; let i = index">
+                    <div
+                        class="flex flex-shrink-0 relative w-full sm:w-auto justify-center"
+                    >
+                        <img
+                            [src]="slide.image"
+                            class="object-cover object-center h-96"
+                            width="260px"
+                        />
+                        <div
+                            class="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6"
+                        >
+                            <h2
+                                class="lg:text-xl leading-4 text-base lg:leading-5 text-white"
+                            >
+                                {{ slide.title }}
+                            </h2>
+                            <div class="flex h-full items-end pb-6">
+                                <h3
+                                    class="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white"
+                                >
+                                    {{ slide.description }}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <button
+            mat-icon-button
+            class="absolute z-30 right-0"
+            (click)="goNext()"
+        >
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+:host {
+    display: block;
+}
+
+.carousel {
+    width: 500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.carousel-inner {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}

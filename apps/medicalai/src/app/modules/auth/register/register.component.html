@@ -11,6 +11,7 @@
                             <mat-form-field class="w-full" appearance="fill">
                                 <mat-label>User Name</mat-label>
                                 <input
+                                    type="string"
                                     matInput
                                     formControlName="username"
                                     placeholder="Example User Name"
@@ -93,7 +94,7 @@
                                     class="w-full"
                                     [disabled]="!registerForm.valid"
                                 >
-                                    <mat-icon>key</mat-icon>
+                                    <mat-icon>app_registration</mat-icon>
                                     Register
                                 </button>
                             </mat-card-footer>

@@ -1,35 +1,76 @@
-<div class="justify-center min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
-    <div class="grid grid-rows-3 grid-flow-col gap-10 place-items-center">
-      <div class="row-span-2 max-w-2xl">
-        <div class="text-4xl font-semibold font-mono text-center">
-          <p class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500">
-            Innovando la atención médica
-          </p>
+<div
+    class="justify-center min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8"
+>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div
+            class="justify-center min-h-full place-items-center px-6 sm:py-32 lg:px-8"
+        >
+            <div
+                class="grid grid-rows-3 grid-flow-col gap-10 place-items-center"
+            >
+                <div class="row-span-2 max-w-2xl">
+                    <div class="text-4xl font-semibold font-mono text-center">
+                        <p
+                            class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-500"
+                        >
+                            Innovando la atención médica
+                        </p>
+                    </div>
+                    <br />
+                    <p class="text-1xl font-medium font-mono text-center">
+                        Medical Asistant IA is a tool at the service of health
+                        to analyze radiographic images and files powered by
+                        <span
+                            class="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-pink-500 to-violet-500"
+                            >Gemini API</span
+                        >.
+                    </p>
+                </div>
+                <div class="col-span-1 max-w-md">
+                    <div class="grid grid-cols-2 gap-4">
+                        <ng-template
+                            [ngIf]="(shareService.isLogged$ | async) !== true"
+                        >
+                            <a
+                                mat-fab
+                                extended
+                                routerLink="/med/auth"
+                                class="w-full"
+                            >
+                                <mat-icon>key</mat-icon>
+                                Login
+                            </a>
+                        </ng-template>
+                        <ng-template
+                            [ngIf]="(shareService.isLogged$ | async) !== true"
+                        >
+                            <a
+                                mat-fab
+                                extended
+                                routerLink="/med/auth/register"
+                                class="w-full"
+                            >
+                                <mat-icon>app_registration</mat-icon>
+                                Register
+                            </a>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
         </div>
-        <br />
-        <p class="text-1xl font-medium font-mono text-center">
-            Medical Asistant IA is a tool at the service of health to analyze radiographic images powered by
-          <span
-            class="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-pink-500 to-violet-500"
-            >Gemini API</span
-          >.
-        </p>
-      </div>
-      <div class="col-span-1 max-w-md">
-        <div class="grid grid-cols-2 gap-4">
-          <ng-template [ngIf]="(shareService.isLogged$ | async) !== true">
-            <a mat-fab extended routerLink="/med/auth" class="w-full">
-              <mat-icon>key</mat-icon>
-              Login
-            </a>
-          </ng-template>
-          <ng-template [ngIf]="(shareService.isLogged$ | async) !== true">
-            <a mat-fab extended routerLink="/med/auth/register" class="w-full">
-              <mat-icon>app_registration</mat-icon>
-              Register
-            </a>
-          </ng-template>
+
+        <div>
+            <div class="grid grid-flow-col gap-10 place-items-center">
+                <div class="col-span-1 max-w-2xl">
+                    <div class="card g-1">
+                        <div class="inner">
+                            <lib-carousel
+                                [slides]="slides"
+                            ></lib-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>

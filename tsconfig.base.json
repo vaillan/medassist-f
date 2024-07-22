@@ -15,6 +15,7 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
+            "@myorg/ang-carousel": ["libs/carousel/src/index.ts"],
             "@myorg/general-layout": ["libs/layout/src/index.ts"],
             "@myorg/material": ["libs/material/src/index.ts"],
             "@myorg/snackbar-notifications": [
