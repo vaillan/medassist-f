@@ -51,9 +51,6 @@ export class AuthInterceptorService {
                     this.clearSession();
                     // this.openTokenDialog();
 
-                } else if (err.error.detail === "Ha ocurrido un error Token is invalid or expired") {
-                    this.clearSession();
-                    // this.openTokenDialog();
                 }
                 return throwError(err);
             })
