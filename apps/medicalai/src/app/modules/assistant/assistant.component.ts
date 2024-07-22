@@ -58,6 +58,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AssistantComponent implements OnInit, OnDestroy {
     @ViewChild('markdownComponent') markdownComponent!: MarkdownComponent;
+    @ViewChild('filesInput') filesInput!: ElementRef;
 
     subscriptions: Subscription = new Subscription();
     assistantForm!: FormGroup;
@@ -123,6 +124,7 @@ export class AssistantComponent implements OnInit, OnDestroy {
                         'danger'
                     );
                     console.error(error);
+                    this.clearFileInput();
                 },
                 complete: () => {
                     this.getUserThreads();
@@ -130,6 +132,7 @@ export class AssistantComponent implements OnInit, OnDestroy {
                         instruccion: null,
                     });
                     this.files = [];
+                    this.clearFileInput();
                 },
             })
         );
@@ -190,6 +193,7 @@ export class AssistantComponent implements OnInit, OnDestroy {
         });
         this.geminiContent = [];
         this.files = [];
+        this.clearFileInput();
     }
 
     getGeminiContentResponse(content: any): void {
@@ -249,5 +253,10 @@ export class AssistantComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
+    }
+
+    clearFileInput() {
+        const list = new DataTransfer();
+        this.filesInput.nativeElement.files = list.files;
     }
 }
